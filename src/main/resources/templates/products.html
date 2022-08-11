@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="fragments/layout">
+
+<head>
+    <title th:text="#{page.files.title}">Page Title</title>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" th:href="@{/dropzone/dropzone.min.css}"/>
+</head>
+
+<body>
+    <span layout:fragment="title" th:text="#{page.files.title}">Page Header</span>
+    <small layout:fragment="description" th:text="#{page.files.description}">Optional description</small>
+
+    <section class="content" layout:fragment="content">
+        <div class="box" id="uploadBox" >
+            <div class="box-header with-border">
+                <h3 class="box-title" th:text="#{file.upload}"></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div class="col-md-12">
+                    <form class="dropzone well" id="dropzone">
+                        <div class="row upload-info">
+                            <div class="form-group col-sm-4 nopadding">
+                                <label th:text="#{file.type}"  class="lable-input">File Type</label>
+                                <select class="form-control select2" id="fileTypeUpload" name="fileTypeUpload" data-error="#errNm1" ></select>
+                           		<label  id="errNm1"></label>
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <div class="form-group col-sm-4">
+                                <label th:text="#{common.note}"  class="lable-input">Note</label>
+                                <input type="text" class="form-control" name="note" id="note" />
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <div th:replace="fragments/upload :: dropzone">
+                        </div>
+                    </form>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer">
+                <button type="button" class="btn btn-info btn-right" id="btnUpload">
+                    <i class="fa fa-cloud-upload"></i>
+                    <span th:text="#{file.upload}">Upload File</span>
+                    
+                </button>
+            </div>
+            <!-- /.box-footer -->
+
+        </div>
+        <!-- /.box -->
+
+        <div class="box" id="searchBox">
+            <div class="box-header with-border">
+                <h3 class="box-title" th:text="#{common.search_condition}">Search Condition</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group col-md-4">
+                            <label th:text="#{file.type}" class="lable-input">File Type</label>
+                            <select class="form-control select2" id="fileType"></select>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="form-group col-md-4">
+                            <label th:text="#{file.name}" class="lable-input">File Name</label>
+                            <input type="text" class="form-control" id="fileName" />
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+
+            <div class="box-footer">
+                <button type="button" class="btn btn-info btn-right" id="btnSearch">
+                    <i class="fa fa-search"></i>
+                    <span th:text="#{common.search}">Search</span>
+                </button>
+            </div>
+            <!-- /.box-footer -->
+
+        </div>
+        <!-- /.box -->
+
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title" th:text="#{common.search_result}">Search Results</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="grid-table"></table>
+                        <div id="grid-pager"></div>
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.box-body -->
+
+        </div>
+        <!-- /.box -->
+        
+        <input type="hidden" id="btnDelete" sec:authorize="hasAuthority('SCR_FILE_DELETE_true')" />
+        <input type="hidden" id="btnDownload" sec:authorize="hasAuthority('SCR_FILE_DOWNLOAD_true')" />      
+    </section> 
+
+    <!-- Custom Scripts -->
+    <th:block layout:fragment="script">
+        <script th:src="@{/dropzone/dropzone.min.js}" sec:authorize="hasAuthority('SCR_FILE_UPLOAD_true')"></script>
+      	<script th:src="@{/file-manager/js/file.js}"></script>
+    </th:block>
+</body>
+
+</html>

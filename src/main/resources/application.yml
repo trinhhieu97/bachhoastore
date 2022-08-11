@@ -1,0 +1,15 @@
+server:
+  port: 8080
+  context-path: /api
+
+spring:
+  data:
+    mongodb:
+      database: storedb
+      username: storeadmin
+      password: adminstore
+      host: localhost
+      port: 27017
+      authentication-database: admin
+  thymeleaf:
+    cache: false

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+    <div th:fragment="dropzone">
+        <div class="fallback">
+            <input name="file" class="hidden" type="file" />
+        </div>
+
+        <div class="dz-default dz-message">
+            <span class="bigger-150 bolder"> <i
+				class="ace-icon fa fa-caret-right red"></i> <span
+				th:text="#{file.drop}">Drop files to upload</span>
+            </span> <span class="smaller-80 grey" th:text="#{file.click}">(or
+				click)</span> <br /> <i class="upload-icon fa fa-cloud-upload blue fa-3x"></i>
+        </div>
+        <div id="preview-template" class="hide">
+            <div class="dz-preview dz-file-preview">
+                <div class="dz-image">
+                    <div class="dz-details">
+                        <div class="dz-size">
+                            <div class="dz-error-message">
+                                <span data-dz-errormessage=""></span>
+                            </div>
+                            <span data-dz-name="" class="dz-filename"></span> <span data-dz-size=""></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress progress-sm active">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress="">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+
+
+                <div class="dz-success-mark">
+                    <span class="fa-stack fa-lg bigger-150"> <i
+						class="fa fa-circle fa-stack-2x white"></i> <i
+						class="fa fa-check fa-stack-1x fa-inverse green"></i>
+					</span>
+                </div>
+
+                <div class="dz-error-mark">
+                    <span class="fa-stack"> <i
+						class="fa fa-circle fa-stack-2x white"></i> <i
+						class="fa fa-remove fa-stack-1x fa-inverse red"></i>
+					</span>
+                </div>
+            </div>
+            <!-- /.dz-preview -->
+        </div>
+        <!-- /.preview-template -->
+        <!-- /.preview-template -->
+    </div>
+    <!-- /.box -->
+</body>
+
+</html>
